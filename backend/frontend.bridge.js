@@ -4,7 +4,6 @@ function mapRowToWish(row) {
   const events = [];
   if (row.attend_pemberkatan) events.push('pemberkatan');
   if (row.attend_resepsi)     events.push('resepsi');
-
   return {
     name:       row.nama_tamu,
     message:    row.pesan,
@@ -14,16 +13,13 @@ function mapRowToWish(row) {
   };
 }
 
-// ─── State ──────────────────────────────────────────────────
+const PAGE_SIZE    = 6;
+let allWishes      = [];
+let displayedCount = 0;
 let realtimeSocket = null;
 
-// ═══════════════════════════════════════════════════════════
-// OVERRIDE: window.addWish
-// Dipanggil dari main.js saat user submit RSVP.
-// Sekarang mengirim ke Supabase, lalu render secara optimistik.
-// ═══════════════════════════════════════════════════════════
+/* ── addWish ── */
 window.addWish = async function (wish) {
-  // Mapping UI format → Supabase format
   const payload = {
     nama_tamu:          wish.name,
     pesan:              wish.message,
@@ -31,186 +27,138 @@ window.addWish = async function (wish) {
     attend_pemberkatan: wish.events?.includes('pemberkatan') ?? false,
     attend_resepsi:     wish.events?.includes('resepsi')     ?? false,
   };
-
   try {
-    const newRow = await SupabaseService.submitRSVP(payload);
-    console.log('[Bridge] RSVP tersimpan:', newRow?.id);
-
-    // Render ulang dari server agar data sinkron
+    await SupabaseService.submitRSVP(payload);
     await refreshWishesWall();
   } catch (err) {
     console.error('[Bridge] Gagal simpan RSVP:', err.message);
-    // Fallback: render optimistik di UI tanpa server
-    renderWishCard(wish);
-    showBridgeError('Ucapan tersimpan sementara. Cek koneksi internet.');
+    showBridgeError('Gagal kirim. Cek koneksi internet.');
   }
 };
 
-// ═══════════════════════════════════════════════════════════
-// OVERRIDE: window.initWishes
-// Dipanggil dari main.js setelah halaman utama terbuka.
-// Mengambil data dari Supabase + aktifkan realtime.
-// ═══════════════════════════════════════════════════════════
+/* ── initWishes ── */
 window.initWishes = async function () {
   await refreshWishesWall();
   startRealtimeSubscription();
 };
 
+/* ── Fetch semua dari Supabase, reset wall ── */
 async function refreshWishesWall() {
   const wall = document.getElementById('wishes-wall');
   if (!wall) return;
-
   try {
-    const { wishes, totalCount } = await SupabaseService.fetchWishes({ limit: 100 });
-
-    // Update counter jika ada elemen
-    const counter = document.getElementById('wishes-count');
-    if (counter) counter.textContent = totalCount;
-
-    // Render semua kartu
+    const { wishes } = await SupabaseService.fetchWishes({ limit: 500 });
+    allWishes      = wishes;
+    displayedCount = 0;
     wall.innerHTML = '';
-    wishes.forEach(row => {
-      const wish = mapRowToWish(row);
-      renderWishCard(wish, false); // false = append to wall (no prepend)
-    });
-
-    // Jika kosong, tampilkan empty state
-    if (wishes.length === 0) {
-      renderEmptyState(wall);
-    }
+    document.getElementById('wishes-load-more')?.remove();
+    appendNextPage();
   } catch (err) {
     console.error('[Bridge] Gagal fetch wishes:', err.message);
-    renderErrorState(document.getElementById('wishes-wall'));
+    renderErrorState(wall);
   }
 }
 
-// ═══════════════════════════════════════════════════════════
-// RENDER SATU KARTU ke wishes wall
-// Reuse fungsi dari wishes.js atau buat sendiri di sini
-// ═══════════════════════════════════════════════════════════
-function renderWishCard(wish, prepend = true) {
+/* ── Render 6 kartu berikutnya ── */
+function appendNextPage() {
   const wall = document.getElementById('wishes-wall');
   if (!wall) return;
 
-  // Gunakan createWishCard dari wishes.js jika tersedia
-  if (typeof createWishCard === 'function') {
-    const card = createWishCard(wish);
-    if (prepend) {
-      wall.insertBefore(card, wall.firstChild);
-    } else {
-      wall.appendChild(card);
-    }
-    return;
-  }
+  document.getElementById('wishes-load-more')?.remove();
 
-  // Fallback inline jika createWishCard tidak tersedia
-  const events = wish.events || [];
-  const badgeHadir   = wish.attendance === 'hadir'
-    ? '<span class="badge badge-hadir">Hadir</span>' : '';
-  const badgeTidak   = wish.attendance === 'tidak'
-    ? '<span class="badge badge-tidak">Tidak Hadir</span>' : '';
-  const badgePemberkatan = events.includes('pemberkatan')
-    ? '<span class="badge badge-pemberkatan">Pemberkatan</span>' : '';
-  const badgeResepsi = events.includes('resepsi')
-    ? '<span class="badge badge-hadir">Resepsi</span>' : '';
+  if (allWishes.length === 0) { renderEmptyState(wall); return; }
 
-  const timeAgo = formatTimeAgoBridge(wish.time);
+  const batch = allWishes.slice(displayedCount, displayedCount + PAGE_SIZE);
+  batch.forEach(row => renderWishCard(mapRowToWish(row), false));
+  displayedCount += batch.length;
 
-  const card = document.createElement('div');
-  card.className = 'masonry-item wish-card';
-  card.innerHTML = `
-    <div class="wish-name">${escapeHTMLBridge(wish.name)}</div>
-    <p class="wish-message">${escapeHTMLBridge(wish.message)}</p>
-    <div class="wish-meta">
-      <span class="wish-time">${timeAgo}</span>
-      <div style="display:flex;flex-wrap:wrap;gap:4px">
-        ${badgeTidak}${badgeHadir}${badgePemberkatan}${badgeResepsi}
-      </div>
-    </div>
-  `;
-
-  if (prepend) {
-    wall.insertBefore(card, wall.firstChild);
-  } else {
-    wall.appendChild(card);
+  const remaining = allWishes.length - displayedCount;
+  if (remaining > 0) {
+    const btn = document.createElement('button');
+    btn.id          = 'wishes-load-more';
+    btn.textContent = `Muat ${Math.min(PAGE_SIZE, remaining)} ucapan lagi`;
+    btn.style.cssText = `
+      display:block;width:100%;margin-top:14px;
+      padding:11px 0;
+      font-family:'Raleway',sans-serif;font-size:0.62rem;
+      font-weight:500;letter-spacing:0.22em;text-transform:uppercase;
+      color:rgba(244,249,233,0.55);background:transparent;
+      border:1px solid rgba(221,161,177,0.2);cursor:pointer;
+      transition:color 0.2s,border-color 0.2s;
+    `;
+    btn.onmouseover = () => { btn.style.color='#f4f9e9'; btn.style.borderColor='rgba(221,161,177,0.5)'; };
+    btn.onmouseout  = () => { btn.style.color='rgba(244,249,233,0.55)'; btn.style.borderColor='rgba(221,161,177,0.2)'; };
+    btn.onclick     = appendNextPage;
+    wall.parentElement.appendChild(btn);
   }
 }
 
+/* ── Render satu kartu ── */
+function renderWishCard(wish, prepend = true) {
+  const wall = document.getElementById('wishes-wall');
+  if (!wall) return;
+  if (typeof window.createWishCard === 'function') {
+    const card = window.createWishCard(wish);
+    prepend ? wall.insertBefore(card, wall.firstChild) : wall.appendChild(card);
+    return;
+  }
+  const card = document.createElement('div');
+  card.className = 'wish-card';
+  card.innerHTML = `
+    <div class="wish-card-name">${esc(wish.name)}</div>
+    <p class="wish-card-msg">${esc(wish.message)}</p>
+    <div class="wish-card-foot">
+      <span class="wish-time">${fmt(wish.time)}</span>
+    </div>`;
+  prepend ? wall.insertBefore(card, wall.firstChild) : wall.appendChild(card);
+}
 
+/* ── Realtime ── */
 function startRealtimeSubscription() {
   if (realtimeSocket && realtimeSocket.readyState !== WebSocket.CLOSED) {
     realtimeSocket.close();
   }
-
   realtimeSocket = SupabaseService.subscribe((newRow) => {
-    console.log('[Realtime] Ucapan baru masuk:', newRow.id);
-
-    const wish = mapRowToWish(newRow);
-    renderWishCard(wish, true); // prepend (muncul di atas)
-
-    // Update counter
+    allWishes.unshift(newRow);
+    displayedCount++;
+    const wall = document.getElementById('wishes-wall');
+    if (wall) renderWishCard(mapRowToWish(newRow), true);
     const counter = document.getElementById('wishes-count');
-    if (counter) counter.textContent = parseInt(counter.textContent || '0', 10) + 1;
-
-    // Subtle flash animasi pada card pertama
-    const firstCard = document.querySelector('#wishes-wall .wish-card');
-    if (firstCard) {
-      firstCard.style.boxShadow = '0 0 0 1px #e26f97';
-      setTimeout(() => firstCard.style.boxShadow = '', 1500);
-    }
+    if (counter) counter.textContent = parseInt(counter.textContent||'0',10) + 1;
   });
 }
 
-// ═══════════════════════════════════════════════════════════
-// HELPER: Empty & Error states
-// ═══════════════════════════════════════════════════════════
+/* ── States ── */
 function renderEmptyState(wall) {
-  wall.innerHTML = `
-    <div style="grid-column:1/-1;text-align:center;padding:2rem 1rem">
-      <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:rgba(244,249,233,0.4)">
-        Belum ada ucapan.<br>Jadilah yang pertama!
-      </p>
-    </div>
-  `;
+  wall.innerHTML = `<p style="font-family:'Parisienne',cursive;color:rgba(244,249,233,.32);
+    font-size:1rem;text-align:center;padding:2rem;column-span:all">
+    Belum ada ucapan. Jadilah yang pertama!</p>`;
 }
-
 function renderErrorState(wall) {
   if (!wall) return;
-  wall.innerHTML = `
-    <div style="grid-column:1/-1;text-align:center;padding:2rem 1rem">
-      <p style="font-family:'DM Sans',sans-serif;font-size:0.75rem;color:rgba(226,111,151,0.6);letter-spacing:.1em">
-        Gagal memuat ucapan. Periksa koneksi internet.
-      </p>
-    </div>
-  `;
+  wall.innerHTML = `<p style="font-family:'Raleway',sans-serif;font-size:0.72rem;
+    color:rgba(226,111,151,0.6);text-align:center;padding:2rem;column-span:all">
+    Gagal memuat ucapan. Periksa koneksi internet.</p>`;
 }
-
 function showBridgeError(msg) {
-  const toast    = document.getElementById('toast');
-  const toastMsg = document.getElementById('toast-msg');
-  if (!toast || !toastMsg) return;
-  toastMsg.textContent = msg;
-  toast.classList.remove('hidden');
-  setTimeout(() => toast.classList.add('hidden'), 4000);
+  const t = document.getElementById('toast');
+  const m = document.getElementById('toast-msg');
+  if (!t||!m) return;
+  m.textContent = msg;
+  t.classList.remove('hidden');
+  setTimeout(() => t.classList.add('hidden'), 4000);
 }
-
-// ═══════════════════════════════════════════════════════════
-// UTILITY
-// ═══════════════════════════════════════════════════════════
-function escapeHTMLBridge(str) {
+function esc(s) {
   const d = document.createElement('div');
-  d.appendChild(document.createTextNode(String(str || '')));
+  d.appendChild(document.createTextNode(String(s||'')));
   return d.innerHTML;
 }
-
-function formatTimeAgoBridge(isoString) {
-  if (!isoString) return '';
-  const diff  = Date.now() - new Date(isoString).getTime();
-  const mins  = Math.floor(diff / 60000);
-  const hours = Math.floor(diff / 3600000);
-  const days  = Math.floor(diff / 86400000);
-  if (mins < 1)   return 'Baru saja';
-  if (mins < 60)  return `${mins} menit lalu`;
-  if (hours < 24) return `${hours} jam lalu`;
-  return `${days} hari lalu`;
+function fmt(iso) {
+  if (!iso) return '';
+  const d = Date.now() - new Date(iso).getTime();
+  const m = Math.floor(d/60000), h = Math.floor(d/3600000), dy = Math.floor(d/86400000);
+  if (m<1) return 'Baru saja';
+  if (m<60) return m+' menit lalu';
+  if (h<24) return h+' jam lalu';
+  return dy+' hari lalu';
 }

@@ -101,11 +101,12 @@ function openInvitation() {
   const btn = document.getElementById('open-invitation-btn');
   if (btn) btn.disabled = true;
 
-  // Set volume 0 SEBELUM play, baru fade — hindari konflik fade
+  // Play musik langsung saat user klik (user gesture = unlock audio context)
   if (sound) {
+    cancelFade();          // batalkan fade yang mungkin sedang berjalan
     sound.volume(0);
-    sound.play();
-    sound.fade(0, 0.65, 2000);
+    sound.play();          // dipanggil dalam user gesture → dijamin play
+    fadeTo(0.65, 2000);    // custom fade — lebih reliable dari sound.fade()
     musicPlaying = true;
     updateMusicBtn();
   }

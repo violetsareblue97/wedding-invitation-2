@@ -956,12 +956,12 @@ div[style*="height: 1px"][style*="linear-gradient(90deg"] {
 .side-panel-left {
   left: 0;
   /* Ganti path foto sesuai file kamu */
-  background-image: url('assets/images/side-left.webp');
+  background-image: url('assets/images/gallery/prewed/3.webp');
 }
 
 .side-panel-right {
   right: 0;
-  background-image: url('assets/images/side-right.webp');
+  background-image: url('assets/images/gallery/prewed/5.webp');
 }
 
 @media (min-width: 1024px) {
