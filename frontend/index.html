@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>Sandya & Kukuh</title>
+  <meta name="description" content="Undangan Pernikahan Ivkrama Sandya Yudha & Yesyurun Hasiholan Kukuh Priyambudi" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Parisienne&family=Raleway:wght@200;300;400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ivory:    '#f4f9e9',
+            carbon:   '#1c1d21',
+            'pink-mist': '#dda1b1',
+            peony:    '#e26f97',
+            charcoal: '#595a5f',
+          },
+          fontFamily: {
+            raleway: ['"Raleway"', 'sans-serif'],
+            libre: ['"Parisienne"', 'cursive'],
+            jost:  ['"Raleway"', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body class="font-jost overflow-hidden">
+
+  <div id="video-bg">
+    <video id="bg-video" autoplay muted loop playsinline>
+      <source src="https://res.cloudinary.com/deforyy1j/video/upload/v1779724057/bg_lidmld.mp4" type="video/mp4" />
+    </video>
+  </div>
+
+  <div class="desktop-side-blur fixed inset-0 z-10 pointer-events-none hidden lg:block"></div>
+  
+  <div id="opening-page" class="fixed inset-0 z-20 flex items-center justify-center">
+    <div class="relative w-full max-w-[500px] mx-auto h-full flex flex-col items-center justify-center px-10 text-center">
+
+      <div class="w-full opacity-0 animate-fadein-delay-1 mb-12">
+        <div class="w-full h-px bg-ivory/15 mb-1.5"></div>
+        <div class="w-4/5 mx-auto h-px bg-pink-mist/35"></div>
+      </div>
+
+      <p class="font-raleway text-ivory/45 tracking-normal text-[0.8rem]  mb-10 opacity-0 animate-fadein-delay-1">
+        UNDANGAN PERNIKAHAN
+      </p>
+
+      <div class="opacity-0 animate-fadein-delay-2">
+        <h1 class="font-libre text-ivory" style="font-size: clamp(3.2rem, 13vw, 4.5rem); line-height:1; letter-spacing:normal">
+          Sandya
+        </h1>
+      </div>
+
+      <div class="opacity-0 animate-fadein-delay-3 my-6 flex items-center gap-4 w-full justify-center">
+        <div class="flex-1 max-w-[80px] h-px bg-pink-mist/30"></div>
+        <span class="font-libre text-pink-mist" style="font-size:2.5rem">&</span>
+        <div class="flex-1 max-w-[80px] h-px bg-pink-mist/30"></div>
+      </div>
+
+      <div class="opacity-0 animate-fadein-delay-4">
+        <h1 class="font-libre text-ivory" style="font-size: clamp(3.2rem, 13vw, 4.5rem); line-height:1; letter-spacing:normal">
+          Kukuh
+        </h1>
+      </div>
+
+      <div class="opacity-0 animate-fadein-delay-5 mt-10 mb-12">
+        <p class="font-raleway text-ivory/50 tracking-normal text-[0.75rem] ">
+          SABTU, 11 JULI 2026
+        </p>
+        <div class="flex items-center gap-2 justify-center mt-3">
+          <div class="w-8 h-px bg-pink-mist/40"></div>
+          <div class="w-8 h-px bg-pink-mist/40"></div>
+        </div>
+      </div>
+
+      <button id="open-invitation-btn"
+        class="opacity-0 animate-fadein-delay-6 relative group overflow-hidden rounded-none"
+        aria-label="Buka undangan pernikahan">
+        <span class="btn-open-inner relative z-10 font-raleway text-sm tracking-normal  text-ivory px-12 py-4 block">
+          BUKA UNDANGAN
+        </span>
+        <div class="btn-open-bg absolute inset-0 rounded-none"></div>
+        <div class="btn-shimmer absolute inset-0"></div>
+      </button>
+
+      <div class="w-full opacity-0 animate-fadein-delay-6 mt-12">
+        <div class="w-4/5 mx-auto h-px bg-pink-mist/35 mb-1.5"></div>
+        <div class="w-full h-px bg-ivory/15"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="main-page" class="hidden relative z-20 w-full max-w-[500px] mx-auto min-h-screen">
+
+    <div id="music-player" class="fixed bottom-6 right-4 z-50 lg:right-[calc(50%-230px)]">
+      <button id="music-toggle" class="music-circle-btn" aria-label="Toggle musik">
+        <svg id="music-icon-on" width="18" height="18" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 18V5l12-2v13"/>
+          <circle cx="6" cy="18" r="3"/>
+          <circle cx="18" cy="16" r="3"/>
+        </svg>
+        <svg id="music-icon-off" width="18" height="18" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="hidden">
+          <path d="M9 18V5l12-2v13" stroke="rgba(244,249,233,0.4)"/>
+          <circle cx="6" cy="18" r="3" stroke="rgba(244,249,233,0.4)"/>
+          <circle cx="18" cy="16" r="3" stroke="rgba(244,249,233,0.4)"/>
+          <line x1="2" y1="2" x2="22" y2="22" stroke="#e26f97" stroke-width="1.6"/>
+        </svg>
+      </button>
+    </div>
+
+    <section id="sec-hero" class="relative min-h-screen flex flex-col items-center justify-center px-8 text-center">
+      <p class="font-raleway text-ivory/35 tracking-normal text-[0.8rem]  mb-8">UNDANGAN PERNIKAHAN</p>
+      <h2 class="font-libre text-ivory mb-3" style="font-size:4rem;line-height:1">Sandya</h2>
+      <div class=" my-6 flex items-center gap-4 w-full justify-center">
+        <div class="flex-1 max-w-[80px] h-px bg-pink-mist/30"></div>
+        <span class="font-libre text-pink-mist" style="font-size:2.5rem">&</span>
+        <div class="flex-1 max-w-[80px] h-px bg-pink-mist/30"></div>
+      </div>
+      <h2 class="font-libre text-ivory mb-10" style="font-size:4rem;line-height:1">Kukuh</h2>
+
+      <div class="flex items-center gap-3 mb-10">
+        <div class="w-6 h-px bg-pink-mist/40"></div>
+        <p class="font-raleway text-ivory/45 text-[0.75rem] tracking-normal ">11 . 07 . 2026</p>
+        <div class="w-6 h-px bg-pink-mist/40"></div>
+      </div>
+
+      <div id="countdown" class="grid grid-cols-4 gap-2 w-full max-w-xs">
+        <div class="countdown-card rounded-none"><span id="cd-days" class="countdown-num">00</span><span class="countdown-label">Hari</span></div>
+        <div class="countdown-card rounded-none"><span id="cd-hours" class="countdown-num">00</span><span class="countdown-label">Jam</span></div>
+        <div class="countdown-card rounded-none"><span id="cd-mins" class="countdown-num">00</span><span class="countdown-label">Menit</span></div>
+        <div class="countdown-card rounded-none"><span id="cd-secs" class="countdown-num">00</span><span class="countdown-label">Detik</span></div>
+      </div>
+
+    </section>
+
+    <section id="sec-couple" class="relative py-24 px-8">
+      <div class="text-center mb-12 relative z-10">
+  <h3 class="sec-title text-4xl mb-1 text-ivory" style="font-family:'Parisienne',cursive !important;">Mempelai</h3>
+  <p class="text-xs text-ivory/80 tracking-normal italic" style="font-family:'Raleway',sans-serif; ">Dua Jiwa yang Dipersatukan</p>
+  <div class="w-10 h-px bg-pink-mist/50 mx-auto mt-4 mb-12"></div>
+</div>
+<div class="section-glass rounded-none">
+
+        <div class="couple-card mb-12 rounded-none">
+          <div class="couple-photo-wrap">
+            <img src="assets/images/gallery/prewed/3.webp" alt="Sandya" class="couple-photo"
+              onerror="this.style.display='none'; this.parentNode.style.background='linear-gradient(160deg,#e26f97,#dda1b1)'" />
+            <div class="couple-photo-frame"></div>
+          </div>
+          <div class="mt-6 text-center">
+            <h4 class="font-libre text-carbon mb-1" style="font-size:2rem; font-weight: normal;">Ivkrama Sandya Yudha</h4>
+            <p class="font-jost font-light text-charcoal text-xs tracking-normal mt-1">Putri dari</p>
+            <p class="font-jost text-carbon text-sm mt-1 leading-relaxed font-medium">
+              Bapak Sarijo & Ibu RR Tatin Eko Suprihartati
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-4 mb-12">
+          <div class="flex-1 h-px bg-pink-mist/25"></div>
+          <span class="font-libre text-pink-mist text-2xl">&</span>
+          <div class="flex-1 h-px bg-pink-mist/25"></div>
+        </div>
+
+        <div class="couple-card rounded-none">
+          <div class="couple-photo-wrap">
+            <img src="assets/images/gallery/prewed/5.webp" alt="Kukuh" class="couple-photo"
+              onerror="this.style.display='none'; this.parentNode.style.background='linear-gradient(160deg,#595a5f,#dda1b1)'" />
+            <div class="couple-photo-frame"></div>
+          </div>
+          <div class="mt-6 text-center">
+            <h4 class="font-libre text-carbon mb-1" style="font-size:2rem; font-weight: normal;">Yesyurun Hasiholan Kukuh P.</h4>
+            <p class="font-jost font-light text-charcoal text-xs tracking-normal mt-1">Putra dari</p>
+            <p class="font-jost text-carbon text-sm mt-1 leading-relaxed font-medium">
+              (Alm.) Ir. Eben Ezer Sitorus & Ibu Tri Sulasmi
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sec-story" class="relative py-16 overflow-hidden px-4">
+      
+      <div class="text-center pb-12 relative z-10">
+        <h3 class="sec-title text-4xl mb-1 text-ivory" style="font-family: 'Parisienne', cursive !important;">Kisah Kami</h3>
+        <p class="text-xs text-ivory/80  tracking-normal" style="font-family: 'Raleway', sans-serif;">Sejarah cinta kami yang dimulai dari pertemuan pertama</p>
+        <div class="w-10 h-px bg-pink-mist/50 mx-auto mt-4"></div>
+      </div>
+
+      <div class="timeline-container">
+        <div class="timeline-line"></div>
+
+        <div class="tl-item reveal">
+          <div class="tl-dot"></div>
+          
+          <div class="tl-left">
+            <h4 class="tl-title" style="font-family: 'Parisienne', cursive !important; font-size: 1.8rem; text-transform: none; letter-spacing: normal;">Awal bertemu</h4>
+            <div class="tl-location" style="font-family:'Raleway',sans-serif;display:flex;align-items:center;gap:3px;"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0;opacity:0.65;margin-right:2px"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>Ternate, 2024</div>
+            <p class="tl-desc" style="font-family: 'Raleway', sans-serif;">
+              Sandya dinas di Ternate.<br>
+              Di sanalah kami bertemu untuk<br>
+              pertama kalinya.<br>
+              Sebuah awal yang sederhana,<br>
+              tapi bermakna.
+            </p>
+          </div>
+
+          <div class="tl-right pt-6">
+            <div class="polaroid-frame">
+              <img src="assets/images/ternate.jpg" alt="Ternate" onerror="this.style.display='none'; this.parentNode.style.background='#dda1b1'" />
+              <span class="polaroid-caption" style="font-family:'Raleway',sans-serif;display:flex;align-items:center;justify-content:center;gap:2px;"><svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0;opacity:0.6;vertical-align:middle;margin-right:2px"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>Ternate, 2024</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-item reveal">
+          <div class="tl-dot"></div>
+          
+          <div class="tl-left"></div>
+
+          <div class="tl-right">
+            <h4 class="tl-title" style="font-family: 'Parisienne', cursive !important; font-size: 1.8rem; text-transform: none; letter-spacing: normal;">Lanjut chattingan</h4>
+            <p class="tl-desc" style="font-family: 'Raleway', sans-serif;">
+              Kami terus terhubung lewat chat.<br>
+              Ada rasa yang muncul,<br>
+              tapi sama-sama menyangkalnya.
+            </p>
+          </div>
+        </div>
+
+        <div class="tl-item reveal">
+          <div class="tl-dot"></div>
+          
+          <div class="tl-left">
+            <h4 class="tl-title" style="font-family: 'Parisienne', cursive !important; font-size: 1.8rem; text-transform: none; letter-spacing: normal;">Ada peran Nurul Inayah</h4>
+            <p class="tl-desc" style="font-family: 'Raleway', sans-serif;">
+              Nurul Inayah, teman kami,<br>
+              meyakinkan Kukuh bahwa<br>
+              Sandya ternyata punya<br>
+              rasa yang sama.<br>
+              Thanks, Nurul!
+            </p>
+          </div>
+
+          <div class="tl-right"></div>
+        </div>
+
+        <div class="tl-item reveal">
+          <div class="tl-dot"></div>
+          
+          <div class="tl-left pt-4">
+             <div class="polaroid-frame ml-auto">
+              <img src="assets/images/manado.jpeg" alt="Manado" onerror="this.style.display='none'; this.parentNode.style.background='#dda1b1'" />
+              <span class="polaroid-caption" style="font-family:'Raleway',sans-serif;display:flex;align-items:center;justify-content:center;gap:2px;"><svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0;opacity:0.6;vertical-align:middle;margin-right:2px"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>Manado</span>
+            </div>
+          </div>
+
+          <div class="tl-right">
+            <h4 class="tl-title" style="font-family: 'Parisienne', cursive !important; font-size: 1.8rem; text-transform: none; letter-spacing: normal;">Pertemuan kedua</h4>
+            <div class="tl-location" style="font-family:'Raleway',sans-serif;display:flex;align-items:center;gap:3px;"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0;opacity:0.65;margin-right:2px"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>Manado</div>
+            <p class="tl-desc" style="font-family: 'Raleway', sans-serif;">
+              Kukuh dinas ke Manado,<br>
+              dan kami bertemu untuk kedua kalinya.<br>
+              Di sini kami semakin akrab,<br>
+              nyaman, dan dekat.
+            </p>
+          </div>
+        </div>
+
+        <div class="tl-item reveal">
+          <div class="tl-dot"></div>
+          
+          <div class="tl-left">
+            <h4 class="tl-title" style="font-family: 'Parisienne', cursive !important; font-size: 1.8rem; text-transform: none; letter-spacing: normal;">Ketidaksengajaan<br>di Soetta</h4>
+            <p class="tl-desc" style="font-family: 'Raleway', sans-serif;">
+              Kami bertemu lagi di Bandara Soekarno-Hatta,<br>
+              saat akan pulang ke Jakarta.<br>
+              Di sanalah Kukuh memberanikan diri<br>
+              mengutarakan perasaan kepada Sandya.<br>
+              Dan ini jadi awal dari kisah cinta kami.
+            </p>
+          </div>
+
+          <div class="tl-right pt-6">
+            <div class="polaroid-frame">
+              <img src="assets/images/jakarta.jpg" alt="Soetta Airport" onerror="this.style.display='none'; this.parentNode.style.background='#dda1b1'" />
+              <span class="polaroid-caption" style="font-family:'Raleway',sans-serif;display:flex;align-items:center;justify-content:center;gap:2px;"><svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0;opacity:0.6;vertical-align:middle;margin-right:2px"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>Soetta Airport</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="relative w-full text-center mt-12 reveal">
+          <h4 class="tl-title mb-2" style="font-family: 'Parisienne', cursive !important; font-size: 2rem; text-transform: none; letter-spacing: normal;">Mulai kisah cinta ini,<br>sampai selamanya</h4>
+          <p class="tl-desc" style="font-family: 'Raleway', sans-serif;">
+            Bersyukur dipertemukan,<br>
+            memilih bersama,<br>
+            dan berjanji untuk selamanya.
+          </p>
+        </div>
+    </section>
+
+    <section id="sec-event" class="relative py-20 px-8">
+      <div class="text-center mb-12 relative z-10">
+  <h3 class="sec-title text-4xl mb-1 text-ivory" style="font-family:'Parisienne',cursive !important;">Tanggal dan Lokasi</h3>
+  <p class="text-xs text-ivory/80  tracking-normal" style="font-family:'Raleway',sans-serif;">Rangkaian Acara Pernikahan</p>
+  <div class="w-10 h-px bg-pink-mist/50 mx-auto mt-4"></div>
+</div>
+
+      <div style="
+        background: rgba(28, 29, 33, 0.85);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(244, 249, 233, 0.1);
+        border-radius: 0px;
+        overflow: hidden;
+        position: relative;
+        margin-bottom: 28px;
+      ">
+        <div style="position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(226, 111, 151, 0.4), transparent);"></div>
+
+        <div style="padding: 36px 24px; text-align: center;">
+          <h4 style="font-family: 'Parisienne', cursive !important; font-size: 2.8rem; color: #dda1b1; margin: 0 0 16px; line-height: 1.1; font-weight: normal;">
+            Pemberkatan
+          </h4>
+
+          <p style="font-family: 'Raleway', sans-serif; font-weight: 600; font-size: 1.1rem; color: rgba(244, 249, 233, 0.95); margin: 0 0 8px; line-height: 1.4;">
+            GMII "Anugerah" Bekasi
+          </p>
+          <p style="font-family: 'Raleway', sans-serif; font-size: 0.75rem; font-weight: 300; color: rgba(244, 249, 233, 0.6); line-height: 1.7; margin: 0 0 20px;">
+            Grand Center (Pusat Mega Bekasi) Blok A 24-25 F2,<br>Jl. Cut Meutia, Bekasi Timur 17113
+          </p>
+          
+          <div style="font-family: 'Raleway', sans-serif; font-size: 0.95rem; font-weight: 500; color: rgba(244, 249, 233, 0.95); margin-bottom: 20px; border-top: 1px solid rgba(244, 249, 233, 0.1); border-bottom: 1px solid rgba(244, 249, 233, 0.1); padding: 10px 0;">
+            Sabtu, 11 Juli 2026   10.00–12.00 WIB
+          </div>
+
+          <div style="display: flex; justify-content: center; gap: 16px; margin-bottom: 28px;">
+            <div style="text-align: center; min-width: 45px;">
+              <span id="pemberkatan-days" style="display: block; font-family: 'Raleway', sans-serif; font-size: 1.3rem; font-weight: 500; color: #dda1b1; line-height: 1;">00</span>
+              <span style="font-family: 'Raleway', sans-serif; font-size: 0.55rem; color: rgba(244, 249, 233, 0.4);  letter-spacing: normal;">Hari</span>
+            </div>
+            <div style="text-align: center; min-width: 45px;">
+              <span id="pemberkatan-hours" style="display: block; font-family: 'Raleway', sans-serif; font-size: 1.3rem; font-weight: 500; color: #dda1b1; line-height: 1;">00</span>
+              <span style="font-family: 'Raleway', sans-serif; font-size: 0.55rem; color: rgba(244, 249, 233, 0.4);  letter-spacing: normal;">Jam</span>
+            </div>
+            <div style="text-align: center; min-width: 45px;">
+              <span id="pemberkatan-minutes" style="display: block; font-family: 'Raleway', sans-serif; font-size: 1.3rem; font-weight: 500; color: #dda1b1; line-height: 1;">00</span>
+              <span style="font-family: 'Raleway', sans-serif; font-size: 0.55rem; color: rgba(244, 249, 233, 0.4);  letter-spacing: normal;">Menit</span>
+            </div>
+            <div style="text-align: center; min-width: 45px;">
+              <span id="pemberkatan-seconds" style="display: block; font-family: 'Raleway', sans-serif; font-size: 1.3rem; font-weight: 500; color: #dda1b1; line-height: 1;">00</span>
+              <span style="font-family: 'Raleway', sans-serif; font-size: 0.55rem; color: rgba(244, 249, 233, 0.4);  letter-spacing: normal;">Detik</span>
+            </div>
+          </div>
+          
+          <div style="margin-top: 8px;">
+            <a href="https://www.google.com/maps/search/GMII+Anugerah+Bekasi+Grand+Center+Bekasi" target="_blank" style="
+              display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+              font-family: 'Raleway', sans-serif; font-size: 0.8rem; font-weight: 500;
+              letter-spacing: normal; 
+              color: #f4f9e9; background: rgba(226, 111, 151, 0.15);
+              border: 1px solid #dda1b1;
+              border-radius: 0px; padding: 12px 32px;
+              cursor: pointer; transition: all 0.2s;
+              text-decoration: none;
+            ">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+              Buka Google Maps
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div style="
+        background: rgba(28, 29, 33, 0.85);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(244, 249, 233, 0.1);
+        border-radius: 0px;
+        overflow: hidden;
+        position: relative;
+      ">
+        <div style="position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(221, 161, 177, 0.4), transparent);"></div>
+
+        <div style="padding: 36px 24px; text-align: center;">
+          <h4 style="font-family: 'Parisienne', cursive !important; font-size: 2.8rem; color: #dda1b1; margin: 0 0 16px; line-height: 1.1; font-weight: normal;">
+            Resepsi
+          </h4>
+
+          <p style="font-family: 'Raleway', sans-serif; font-weight: 600; font-size: 1.1rem; color: rgba(244, 249, 233, 0.95); margin: 0 0 8px; line-height: 1.4;">
+            Gedung Serbaguna KPPN Purworejo
+          </p>
+          <p style="font-family: 'Raleway', sans-serif; font-size: 0.75rem; font-weight: 300; color: rgba(244, 249, 233, 0.6); line-height: 1.7; margin: 0 0 20px;">
+            Jl. Urip Sumoharjo No. 83, Purworejo 54111
+          </p>
+          
+          <div style="font-family: 'Raleway', sans-serif; font-size: 0.95rem; font-weight: 500; color: rgba(244, 249, 233, 0.95); margin-bottom: 20px; border-top: 1px solid rgba(244, 249, 233, 0.1); border-bottom: 1px solid rgba(244, 249, 233, 0.1); padding: 10px 0;">
+            Minggu, 19 Juli 2026   10.00–13.00 WIB
+          </div>
+
+          <div style="display: flex; justify-content: center; gap: 16px; margin-bottom: 28px;">
+            <div style="text-align: center; min-width: 45px;">
+              <span id="resepsi-days" style="display: block; font-family: 'Raleway', sans-serif; font-size: 1.3rem; font-weight: 500; color: #dda1b1; line-height: 1;">00</span>
+              <span style="font-family: 'Raleway', sans-serif; font-size: 0.55rem; color: rgba(244, 249, 233, 0.4);  letter-spacing: normal;">Hari</span>
+            </div>
+            <div style="text-align: center; min-width: 45px;">
+              <span id="resepsi-hours" style="display: block; font-family: 'Raleway', sans-serif; font-size: 1.3rem; font-weight: 500; color: #dda1b1; line-height: 1;">00</span>
+              <span style="font-family: 'Raleway', sans-serif; font-size: 0.55rem; color: rgba(244, 249, 233, 0.4);  letter-spacing: normal;">Jam</span>
+            </div>
+            <div style="text-align: center; min-width: 45px;">
+              <span id="resepsi-minutes" style="display: block; font-family: 'Raleway', sans-serif; font-size: 1.3rem; font-weight: 500; color: #dda1b1; line-height: 1;">00</span>
+              <span style="font-family: 'Raleway', sans-serif; font-size: 0.55rem; color: rgba(244, 249, 233, 0.4);  letter-spacing: normal;">Menit</span>
+            </div>
+            <div style="text-align: center; min-width: 45px;">
+              <span id="resepsi-seconds" style="display: block; font-family: 'Raleway', sans-serif; font-size: 1.3rem; font-weight: 500; color: #dda1b1; line-height: 1;">00</span>
+              <span style="font-family: 'Raleway', sans-serif; font-size: 0.55rem; color: rgba(244, 249, 233, 0.4);  letter-spacing: normal;">Detik</span>
+            </div>
+          </div>
+          
+          <div style="margin-top: 8px;">
+            <a href="https://www.google.com/maps/search/KPPN+Purworejo+Jl+Urip+Sumoharjo" target="_blank" style="
+              display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+              font-family: 'Raleway', sans-serif; font-size: 0.8rem; font-weight: 500;
+              letter-spacing: normal; 
+              color: #f4f9e9; background: rgba(221, 161, 177, 0.15);
+              border: 1px solid #dda1b1;
+              border-radius: 0px; padding: 12px 32px;
+              cursor: pointer; transition: all 0.2s;
+              text-decoration: none;
+            ">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+              Buka Google Maps
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        (function() {
+          function initEventClock(targetIsoStr, prefix) {
+            const targetTime = new Date(targetIsoStr).getTime();
+            
+            const dEl = document.getElementById(prefix + '-days');
+            const hEl = document.getElementById(prefix + '-hours');
+            const mEl = document.getElementById(prefix + '-minutes');
+            const sEl = document.getElementById(prefix + '-seconds');
+            
+            function updateClock() {
+              const now = new Date().getTime();
+              const distance = targetTime - now;
+              
+              if (distance <= 0) {
+                if (dEl) dEl.innerText = "00";
+                if (hEl) hEl.innerText = "00";
+                if (mEl) mEl.innerText = "00";
+                if (sEl) sEl.innerText = "00";
+                return;
+              }
+              
+              const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+              const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+              const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+              const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+              
+              if (dEl) dEl.innerText = String(days).padStart(2, '0');
+              if (hEl) hEl.innerText = String(hours).padStart(2, '0');
+              if (mEl) mEl.innerText = String(minutes).padStart(2, '0');
+              if (sEl) sEl.innerText = String(seconds).padStart(2, '0');
+            }
+            
+            updateClock();
+            setInterval(updateClock, 1000);
+          }
+
+          initEventClock('2026-07-11T10:00:00+07:00', 'pemberkatan');
+          initEventClock('2026-07-19T10:00:00+07:00', 'resepsi');
+        })();
+      </script>
+    </section>
+
+<section id="sec-gallery" class="relative py-20 px-4">
+  <div class="text-center mb-10 px-4 relative z-10">
+    <h3 class="sec-title text-4xl mb-1 text-ivory" style="font-family:'Parisienne',cursive !important;">Galeri Foto</h3>
+    <p class="text-xs text-ivory/80  tracking-normal" style="font-family:'Raleway',sans-serif;">Kenangan-kenangan indah</p>
+    <div class="w-10 h-px bg-pink-mist/50 mx-auto mt-4"></div>
+  </div>
+
+  <!-- Filter Tabs -->
+  <div class="filter-wrap">
+    <button class="gallery-filter-btn active" data-filter="all" onclick="filterGallery('all',this)">Semua</button>
+    <button class="gallery-filter-btn" data-filter="prewed" onclick="filterGallery('prewed',this)">Prewed</button>
+    <button class="gallery-filter-btn" data-filter="borobudur" onclick="filterGallery('borobudur',this)">Borobudur</button>
+    <button class="gallery-filter-btn" data-filter="jogja" onclick="filterGallery('jogja',this)">Jogja</button>
+  </div>
+
+<div id="gallery-container">
+
+  <!-- PREWED GROUP -->
+  <div class="gallery-group" data-group="prewed">
+    <div class="masonry-grid px-1">
+      <div class="masonry-item" data-theme="prewed"><img src="assets/images/gallery/prewed/1.webp" alt="" class="gallery-img" loading="lazy" /></div>
+      <div class="masonry-item" data-theme="prewed"><img src="assets/images/gallery/prewed/11.webp" alt="" class="gallery-img" loading="lazy" /></div>
+      <div class="masonry-item" data-theme="prewed"><img src="assets/images/gallery/prewed/9.webp" alt="" class="gallery-img" loading="lazy" /></div>
+      <div class="masonry-item" data-theme="prewed"><img src="assets/images/gallery/prewed/15.webp" alt="" class="gallery-img" loading="lazy" /></div>
+      <div class="masonry-item" data-theme="prewed"><img src="assets/images/gallery/prewed/4.webp" alt="" class="gallery-img" loading="lazy" /></div>
+      <div class="masonry-item" data-theme="prewed"><img src="assets/images/gallery/prewed/20.webp" alt="" class="gallery-img" loading="lazy" /></div>
+      <div class="masonry-item" data-theme="prewed"><img src="assets/images/gallery/prewed/2.webp" alt="" class="gallery-img" loading="lazy" /></div>
+      <div class="masonry-item" data-theme="prewed"><img src="assets/images/gallery/prewed/21.webp" alt="" class="gallery-img" loading="lazy" /></div>
+      <div class="masonry-item" data-theme="prewed"><img src="assets/images/gallery/prewed/10.webp" alt="" class="gallery-img" loading="lazy" /></div>
+      <div class="masonry-item" data-theme="prewed"><img src="assets/images/gallery/prewed/16.webp" alt="" class="gallery-img" loading="lazy" /></div>
+      <div class="masonry-item" data-theme="prewed"><img src="assets/images/gallery/prewed/17.webp" alt="" class="gallery-img" loading="lazy" /></div>
+      <div class="masonry-item" data-theme="prewed"><img src="assets/images/gallery/prewed/7.webp" alt="" class="gallery-img" loading="lazy" /></div>
+      <div class="masonry-item" data-theme="prewed"><img src="assets/images/gallery/prewed/13.webp" alt="" class="gallery-img" loading="lazy" /></div>
+      <div class="masonry-item" data-theme="prewed"><img src="assets/images/gallery/prewed/6.webp" alt="" class="gallery-img" loading="lazy" /></div>
+      <div class="masonry-item" data-theme="prewed"><img src="assets/images/gallery/prewed/19.webp" alt="" class="gallery-img" loading="lazy" /></div>
+      <div class="masonry-item" data-theme="prewed"><img src="assets/images/gallery/prewed/3.webp" alt="" class="gallery-img" loading="lazy" /></div>
+      <div class="masonry-item" data-theme="prewed"><img src="assets/images/gallery/prewed/14.webp" alt="" class="gallery-img" loading="lazy" /></div>
+      <div class="masonry-item" data-theme="prewed"><img src="assets/images/gallery/prewed/3.webp" alt="" class="gallery-img" loading="lazy" /></div>
+      <div class="masonry-item" data-theme="prewed"><img src="assets/images/gallery/prewed/18.webp" alt="" class="gallery-img" loading="lazy" /></div>
+      <div class="masonry-item" data-theme="prewed"><img src="assets/images/gallery/prewed/5.webp" alt="" class="gallery-img" loading="lazy" /></div>
+    </div>
+  </div>
+
+  <!-- DIVIDER JOGJA -->
+  <div class="gallery-divider" data-divider="jogja">
+    <div class="gallery-divider-line"></div>
+    <span class="gallery-divider-label">Jogja</span>
+    <div class="gallery-divider-line"></div>
+  </div>
+
+  <!-- JOGJA GROUP -->
+  <div class="gallery-group" data-group="jogja">
+    <div class="masonry-grid px-1">
+      <div class="masonry-item" data-theme="jogja"><img src="assets/images/gallery/jogja/1.webp" alt="" class="gallery-img" loading="lazy" /></div>
+      <div class="masonry-item" data-theme="jogja"><img src="assets/images/gallery/jogja/2.webp" alt="" class="gallery-img" loading="lazy" /></div>
+      <div class="masonry-item" data-theme="jogja"><img src="assets/images/gallery/jogja/3.webp" alt="" class="gallery-img" loading="lazy" /></div>
+      <div class="masonry-item" data-theme="jogja"><img src="assets/images/gallery/jogja/4.webp" alt="" class="gallery-img" loading="lazy" /></div>
+      <div class="masonry-item" data-theme="jogja"><img src="assets/images/gallery/jogja/5.webp" alt="" class="gallery-img" loading="lazy" /></div>
+      <div class="masonry-item" data-theme="jogja"><img src="assets/images/gallery/jogja/6.webp" alt="" class="gallery-img" loading="lazy" /></div>
+      <div class="masonry-item" data-theme="jogja"><img src="assets/images/gallery/jogja/7.webp" alt="" class="gallery-img" loading="lazy" /></div>
+      <div class="masonry-item" data-theme="jogja"><img src="assets/images/gallery/jogja/8.webp" alt="" class="gallery-img" loading="lazy" /></div>
+      <div class="masonry-item" data-theme="jogja"><img src="assets/images/gallery/jogja/9.webp" alt="" class="gallery-img" loading="lazy" /></div>
+    </div>
+  </div>
+
+  <!-- DIVIDER BOROBUDUR -->
+  <div class="gallery-divider" data-divider="borobudur">
+    <div class="gallery-divider-line"></div>
+    <span class="gallery-divider-label">Borobudur</span>
+    <div class="gallery-divider-line"></div>
+  </div>
+
+  <!-- BOROBUDUR GROUP -->
+  <div class="gallery-group" data-group="borobudur">
+    <div class="masonry-grid px-1">
+      <div class="masonry-item" data-theme="borobudur"><img src="assets/images/gallery/borobudur/1.webp" alt="" class="gallery-img" loading="lazy" /></div>
+      <div class="masonry-item" data-theme="borobudur"><img src="assets/images/gallery/borobudur/2.webp" alt="" class="gallery-img" loading="lazy" /></div>
+      <div class="masonry-item" data-theme="borobudur"><img src="assets/images/gallery/borobudur/3.webp" alt="" class="gallery-img" loading="lazy" /></div>
+      <div class="masonry-item" data-theme="borobudur"><img src="assets/images/gallery/borobudur/4.webp" alt="" class="gallery-img" loading="lazy" /></div>
+      <div class="masonry-item" data-theme="borobudur"><img src="assets/images/gallery/borobudur/5.webp" alt="" class="gallery-img" loading="lazy" /></div>
+      <div class="masonry-item" data-theme="borobudur"><img src="assets/images/gallery/borobudur/6.webp" alt="" class="gallery-img" loading="lazy" /></div>
+      <div class="masonry-item" data-theme="borobudur"><img src="assets/images/gallery/borobudur/7.webp" alt="" class="gallery-img" loading="lazy" /></div>
+      <div class="masonry-item" data-theme="borobudur"><img src="assets/images/gallery/borobudur/8.webp" alt="" class="gallery-img" loading="lazy" /></div>
+      <div class="masonry-item" data-theme="borobudur"><img src="assets/images/gallery/borobudur/9.webp" alt="" class="gallery-img" loading="lazy" /></div>
+      <div class="masonry-item" data-theme="borobudur"><img src="assets/images/gallery/borobudur/10.webp" alt="" class="gallery-img" loading="lazy" /></div>
+      <div class="masonry-item" data-theme="borobudur"><img src="assets/images/gallery/borobudur/11.webp" alt="" class="gallery-img" loading="lazy" /></div>
+      <div class="masonry-item" data-theme="borobudur"><img src="assets/images/gallery/borobudur/12.webp" alt="" class="gallery-img" loading="lazy" /></div>
+      <div class="masonry-item" data-theme="borobudur"><img src="assets/images/gallery/borobudur/13.webp" alt="" class="gallery-img" loading="lazy" /></div>
+      <div class="masonry-item" data-theme="borobudur"><img src="assets/images/gallery/borobudur/14.webp" alt="" class="gallery-img" loading="lazy" /></div>
+    </div>
+  </div>
+
+</div>
+
+
+</section>
+    <section id="sec-gift" class="relative py-20 px-8">
+      <div class="text-center mb-10 relative z-10">
+        <h3 class="sec-title text-4xl mb-1 text-ivory" style="font-family: 'Parisienne', cursive !important;">Amplop Digital</h3>
+        <p class="text-xs text-ivory/80 tracking-normal" style="font-family: 'Raleway', sans-serif;">Kehadiran dan Doa Anda sangat berarti bagi kami</p>
+        <div class="w-10 h-px bg-pink-mist/50 mx-auto mt-4 mb-5"></div>
+      </div>
+
+      <div class="filter-wrap mb-10 relative z-10 text-center">
+        <button id="tab-sandya" class="gallery-filter-btn active" onclick="pindahTab('sandya')">Sandya</button>
+        <button id="tab-kukuh" class="gallery-filter-btn" onclick="pindahTab('kukuh')">Kukuh</button>
+      </div>
+
+      <div id="konten-sandya" style="display: block; text-align: center;">
+        <div class="mb-4 p-6 border border-pink-mist bg-white/5 backdrop-blur-sm rounded-none">
+          <div style="font-family: 'Raleway', sans-serif; color: #f4f9e9; margin-bottom: 12px; font-size: 0.9rem;">BNI a.n. Ivkrama Sandya Yudha</div>
+          <button onclick="salin('0908615539', this)" style="display: inline-flex; align-items: center; justify-content: center; font-family: 'Raleway', sans-serif; font-size: 0.7rem; font-weight: 500; letter-spacing: normal;  color: #fff; border: 1px solid #dda1b1; border-radius: 0px; padding: 10px 24px; background: rgba(255, 255, 255, 0.05); cursor: pointer;">0908615539</button>
+        </div>
+        <div class="mb-4 p-6 border border-pink-mist bg-white/5 backdrop-blur-sm rounded-none">
+          <div style="font-family: 'Raleway', sans-serif; color: #f4f9e9; margin-bottom: 12px; font-size: 0.9rem;">BRI a.n. Ivkrama Sandya Yudha</div>
+          <button onclick="salin('050701021049502', this)" style="display: inline-flex; align-items: center; justify-content: center; font-family: 'Raleway', sans-serif; font-size: 0.7rem; font-weight: 500; letter-spacing: normal;  color: #fff; border: 1px solid #dda1b1; border-radius: 0px; padding: 10px 24px; background: rgba(255, 255, 255, 0.05); cursor: pointer;">050701021049502</button>
+        </div>
+      </div>
+
+      <div id="konten-kukuh" style="display: none; text-align: center;">
+        <div class="mb-4 p-6 border border-pink-mist/20 bg-white/5 backdrop-blur-sm rounded-none">
+          <div style="font-family: 'Raleway', sans-serif; color: #f4f9e9; margin-bottom: 12px; font-size: 0.9rem;">Mandiri a.n. Yesyurun Hasiholan Kukuh Priyambudi</div>
+          <button onclick="salin('1860003454382', this)" style="display: inline-flex; align-items: center; justify-content: center; font-family: 'Raleway', sans-serif; font-size: 0.7rem; font-weight: 500; letter-spacing: normal;  color: #fff; border: 1px solid #dda1b1; border-radius: 0px; padding: 10px 24px; background: rgba(255, 255, 255, 0.05); cursor: pointer;">1860003454382</button>
+        </div>
+        <div class="mb-4 p-6 border border-pink-mist/20 bg-white/5 backdrop-blur-sm rounded-none">
+          <div style="font-family: 'Raleway', sans-serif; color: #f4f9e9; margin-bottom: 12px; font-size: 0.9rem;">Blu BCA a.n. Yesyurun Hasiholan Kukuh Priyambudi</div>
+          <button onclick="salin('002873605342', this)" style="display: inline-flex; align-items: center; justify-content: center; font-family: 'Raleway', sans-serif; font-size: 0.7rem; font-weight: 500; letter-spacing: normal;  color: #fff; border: 1px solid #dda1b1; border-radius: 0px; padding: 10px 24px; background: rgba(255, 255, 255, 0.05); cursor: pointer;">002873605342</button>
+        </div>
+      </div>
+
+      <script>
+      function pindahTab(nama) {
+        const sDiv = document.getElementById('konten-sandya');
+        const kDiv = document.getElementById('konten-kukuh');
+        const sTab = document.getElementById('tab-sandya');
+        const kTab = document.getElementById('tab-kukuh');
+        if (nama === 'sandya') {
+          sDiv.style.display = 'block'; kDiv.style.display = 'none';
+          sTab.classList.add('active'); kTab.classList.remove('active');
+        } else {
+          sDiv.style.display = 'none'; kDiv.style.display = 'block';
+          kTab.classList.add('active'); sTab.classList.remove('active');
+        }
+      }
+        function salin(teks, btn) {
+          navigator.clipboard.writeText(teks).then(() => {
+            const asli = btn.innerText;
+            btn.innerText = "Tersalin!";
+            setTimeout(() => btn.innerText = asli, 2000);
+          });
+        }
+      </script>
+    </section>
+
+    <section id="sec-rsvp" class="relative py-20 px-8">
+      <div class="text-center mb-12 relative z-10">
+  <h3 class="sec-title text-4xl mb-1 text-ivory" style="font-family:'Parisienne',cursive !important;">RSVP dan Ucapan</h3>
+  <p class="text-xs text-ivory/80  tracking-normal" style="font-family:'Raleway',sans-serif;">Silahkan isi formulir di bawah untuk RSVP dan kirim ucapan</p>
+  <div class="w-10 h-px bg-pink-mist/50 mx-auto mt-4 mb-10"></div>
+</div>
+<div class="section-glass rounded-none">
+        <div class="space-y-5">
+          <div class="form-group">
+            <label class="form-label">Nama Lengkap</label>
+            <input type="text" id="rsvp-name" class="form-input rounded-none" placeholder="Tulis nama Anda..." />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Kehadiran</label>
+            <div class="attendance-options">
+              <label class="attend-option"><input type="radio" name="attendance" value="hadir" class="hidden" /><span class="attend-box rounded-none">Hadir</span></label>
+              <label class="attend-option"><input type="radio" name="attendance" value="tidak" class="hidden" /><span class="attend-box rounded-none">Tidak Hadir</span></label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Pilih Acara</label>
+            <div id="event-options" class="event-options locked rounded-none">
+              <label class="event-option"><input type="checkbox" value="pemberkatan" class="event-checkbox hidden" /><span class="event-box rounded-none">Pemberkatan</span></label>
+              <label class="event-option"><input type="checkbox" value="resepsi" class="event-checkbox hidden" /><span class="event-box rounded-none">Resepsi</span></label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Ucapan & Doa</label>
+            <textarea id="rsvp-message" class="form-textarea rounded-none" rows="3" placeholder="Tulis ucapan dan doa terbaik Anda..."></textarea>
+          </div>
+          <button id="rsvp-submit" class="rsvp-submit-btn rounded-none" onclick="submitRSVP()">
+            <span id="rsvp-btn-text">Kirim Ucapan</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section id="sec-wishes" class="relative py-16 px-4">
+      <div class="text-center mb-10 px-4 relative z-10">
+        <h3 class="sec-title text-4xl mb-1 text-ivory" style="font-family: 'Parisienne', cursive !important;">Doa & Ucapan</h3>
+        <p class="text-xs text-ivory/80  tracking-normal" style="font-family: 'Raleway', sans-serif;">Terima kasih atas doa dan ucapan yang Anda kirimkan</p>
+        <div class="w-10 h-px bg-pink-mist/50 mx-auto mt-4"></div>
+      </div>
+      <div id="wishes-wall" class="masonry-grid px-2 rounded-none"></div>
+    </section>
+
+    <section class="relative py-20 px-8 text-center">
+      <div class="w-20 h-px bg-pink-mist/25 mx-auto mb-1.5"></div>
+      <div class="w-32 h-px bg-pink-mist/40 mx-auto mb-10"></div>
+      <h2 class="font-libre text-ivory mb-2" style="font-size:2.5rem; font-weight: normal;">Sandya & Kukuh</h2>
+      <p class="font-raleway text-ivory text-[0.75rem] tracking-normal mb-8">11 . 07 . 2026</p>
+      <p class="font-jost font italic text-ivory text-xs leading-relaxed max-w-[250px] mx-auto">
+        "Dan di atas segalanya, kenakanlah kasih, sebagai pengikat yang mempersatukan dan menyempurnakan."
+      </p>
+      <p class="font-jost font italic text-ivory text-xs leading-relaxed max-w-[250px] mx-auto">
+        Kolose 3:14</p>
+      <div class="w-32 h-px bg-pink-mist/40 mx-auto mt-10 mb-1.5"></div>
+      <div class="w-20 h-px bg-pink-mist/25 mx-auto"></div>
+    </section>
+
+  </div>
+
+  </div><!-- end #main-page -->
+
+  <!-- LIGHTBOX — harus di luar #main-page agar fixed ke viewport -->
+  <div id="lightbox" class="lightbox hidden">
+    <button id="lb-close" class="lb-close-btn" aria-label="Tutup"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>
+    <button id="lb-prev" class="lb-nav-btn lb-prev-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></button>
+    <img id="lb-img" src="" alt="" class="lb-image" />
+    <button id="lb-next" class="lb-nav-btn lb-next-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg></button>
+    <div id="lb-dots" class="lb-dots"></div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast" class="toast hidden rounded-none">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" class="text-peony flex-shrink-0"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+    <span id="toast-msg">Berhasil!</span>
+  </div>
+  <div id="story-overlay" class="fixed inset-0 z-40 bg-carbon/60 backdrop-blur-sm hidden" onclick="closeStoryPopup()"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/howler@2.2.4/dist/howler.min.js"></script>
+  <script src="assets/js/countdown.js"></script>
+  <script src="assets/js/gallery.js"></script>
+
+  <script src="assets/js/wishes.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script src="../backend/config.js"></script>
+  <script src="../backend/supabase.service.js"></script>
+
+  <script src="../backend/frontend.bridge.js"></script>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
