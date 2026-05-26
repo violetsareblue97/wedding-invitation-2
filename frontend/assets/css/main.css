@@ -893,3 +893,82 @@ div[style*="height: 1px"][style*="linear-gradient(90deg"] {
   white-space: nowrap;
   line-height: 1;
 }
+
+
+/* Tablet ke bawah: wishes 1 kolom, gallery tetap 2 */
+@media (max-width: 500px) {
+  #wishes-wall {
+    columns: 1 !important;
+    column-gap: 0 !important;
+  }
+  .wish-card {
+    width: 100% !important;
+    display: block !important;
+    break-inside: avoid;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    border-left: none;               /* hapus garis kiri yg cramped di mobile */
+    border-top: 1px solid rgba(221,161,177,0.25);
+  }
+  .wish-card-name,
+  .wish-name {
+    font-size: 0.95rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .wish-card-msg,
+  .wish-message {
+    font-size: 0.72rem;
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+  /* Padding section lebih kecil di mobile */
+  #sec-rsvp,
+  #sec-event,
+  #sec-gift,
+  #sec-wishes { padding-left: 1.25rem; padding-right: 1.25rem; }
+
+  /* Timeline lebih rapat di mobile */
+  .tl-left, .tl-right { padding-left: 0.75rem; padding-right: 0.75rem; }
+  .polaroid-frame { width: 90px; }
+}
+
+.side-panel {
+  display: none;
+  position: fixed;
+  top: 0; bottom: 0;
+  width: calc((100vw - var(--page-w)) / 2);
+  z-index: 10;
+  pointer-events: none;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.side-panel::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(12, 12, 14, 0.45); /* overlay gelap tipis */
+}
+
+.side-panel-left {
+  left: 0;
+  /* Ganti path foto sesuai file kamu */
+  background-image: url('assets/images/side-left.webp');
+}
+
+.side-panel-right {
+  right: 0;
+  background-image: url('assets/images/side-right.webp');
+}
+
+@media (min-width: 1024px) {
+  .side-panel { display: block; }
+}
+
+/* Kalau viewport terlalu sempit untuk side panel, sembunyikan */
+@media (max-width: 1023px) {
+  .side-panel { display: none; }
+}

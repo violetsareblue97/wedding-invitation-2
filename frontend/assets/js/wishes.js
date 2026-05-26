@@ -66,3 +66,4 @@ window.initWishes = function() {
   renderWishes();
   setInterval(renderWishes, 30000);
 };
+
