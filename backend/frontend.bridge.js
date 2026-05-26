@@ -1,29 +1,4 @@
-// ═══════════════════════════════════════════════════════════
-// FRONTEND BRIDGE
-// wedding-backend/frontend.bridge.js
-//
-// File ini menjadi penghubung antara UI (index.html / wishes.js)
-// dengan SupabaseService. Dipanggil dari main.js frontend.
-//
-// Yang dilakukan file ini:
-//  1. Override window.addWish  → kirim ke Supabase
-//  2. Override window.initWishes → load dari Supabase + subscribe realtime
-//  3. Map kolom Supabase → format yang dimengerti wishes.js
-// ═══════════════════════════════════════════════════════════
-
 'use strict';
-
-// ─── Peta kolom Supabase → format internal UI ─────────────
-//
-//  Supabase             → UI (wishes.js)
-//  ─────────────────────────────────────
-//  nama_tamu            → name
-//  pesan                → message
-//  tidak_hadir          → attendance ('tidak' / 'hadir')
-//  attend_pemberkatan   → events[] ('pemberkatan')
-//  attend_resepsi       → events[] ('resepsi')
-//  created_at           → time (ISO string)
-// ─────────────────────────────────────────────────────────
 
 function mapRowToWish(row) {
   const events = [];
@@ -81,9 +56,6 @@ window.initWishes = async function () {
   startRealtimeSubscription();
 };
 
-// ═══════════════════════════════════════════════════════════
-// REFRESH WALL — ambil ulang semua data dari Supabase
-// ═══════════════════════════════════════════════════════════
 async function refreshWishesWall() {
   const wall = document.getElementById('wishes-wall');
   if (!wall) return;
@@ -164,11 +136,8 @@ function renderWishCard(wish, prepend = true) {
   }
 }
 
-// ═══════════════════════════════════════════════════════════
-// REALTIME — subscribe ke INSERT baru
-// ═══════════════════════════════════════════════════════════
+
 function startRealtimeSubscription() {
-  // Tutup koneksi lama jika ada
   if (realtimeSocket && realtimeSocket.readyState !== WebSocket.CLOSED) {
     realtimeSocket.close();
   }

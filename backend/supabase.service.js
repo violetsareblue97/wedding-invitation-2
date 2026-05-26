@@ -1,14 +1,3 @@
-// ═══════════════════════════════════════════════════════════
-// SUPABASE SERVICE LAYER
-// wedding-backend/supabase.service.js
-//
-// Berisi semua operasi database:
-//  - submitRSVP()     → INSERT ucapan baru
-//  - fetchWishes()    → SELECT semua ucapan (urut terbaru)
-//  - subscribeWishes()→ REALTIME listener ucapan baru
-//  - getStats()       → Hitung agregat kehadiran
-// ═══════════════════════════════════════════════════════════
-
 'use strict';
 
 // ─── Validasi config tersedia ────────────────────────────
